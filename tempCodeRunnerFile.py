@@ -1,1 +1,4 @@
-filtered_df.to_csv("airports.csv", index=False)
+import pandas as pd
+
+# Load your CSV
+df = pd.read_csv("airports.csv")

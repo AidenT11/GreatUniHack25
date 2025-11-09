@@ -3,6 +3,9 @@ import pandas as pd
 # Load your CSV
 df = pd.read_csv("airports.csv")
 
+# Remove rows where ISO country is AQ (Antarctica)
+df = df[df['iso_country'] != "AQ"]
+
 # Dictionary mapping ISO country codes to your custom country names
 iso_to_country = {
     "AF": "Afghanistan",
@@ -44,7 +47,7 @@ iso_to_country = {
     "CO": "Colombia",
     "KM": "Comoros",
     "CG": "Congo",
-    "CD": "Congo {Democratic Rep}",
+    "CD": "Democratic Republic of Congo",
     "CR": "Costa Rica",
     "HR": "Croatia",
     "CU": "Cuba",
@@ -70,6 +73,7 @@ iso_to_country = {
     "GE": "Georgia",
     "DE": "Germany",
     "GH": "Ghana",
+    "GL": "Greenland",
     "GR": "Greece",
     "GD": "Grenada",
     "GT": "Guatemala",
@@ -84,7 +88,7 @@ iso_to_country = {
     "ID": "Indonesia",
     "IR": "Iran",
     "IQ": "Iraq",
-    "IE": "Ireland {Republic}",
+    "IE": "Republic of Ireland",
     "IL": "Israel",
     "IT": "Italy",
     "CI": "Ivory Coast",
@@ -126,7 +130,7 @@ iso_to_country = {
     "ME": "Montenegro",
     "MA": "Morocco",
     "MZ": "Mozambique",
-    "MM": "Myanmar, {Burma}",
+    "MM": "Myanmar, (Burma)",
     "NA": "Namibia",
     "NR": "Nauru",
     "NP": "Nepal",
@@ -204,8 +208,6 @@ iso_to_country = {
 }
 
 # Apply the mapping to your CSV
-df['iso_country'] = df['iso_country'].str.upper().str.strip()
-
 df['iso_country'] = df['iso_country'].map(iso_to_country)
 
 # Optional: replace the original column
