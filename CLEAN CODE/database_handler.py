@@ -6,8 +6,8 @@ try:
     sqliteConnection = sqlite3.connect('Holiday_Buddies.db')
     cursor = sqliteConnection.cursor()
 
-    area1 = "France, Paris"
-    area2 = "Japan, Fukushima"
+    area1 = "Germany, Hamburg"
+    area2 = "Austria, Graz"
 
     location1, location2 = geocode_coords(area1, area2)
 
