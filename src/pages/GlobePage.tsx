@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Globe } from 'lucide-react';
 import { useNavigate as UseNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const countries = [
   { name: 'Japan', emoji: '🇯🇵', color: 'text-red-500' },

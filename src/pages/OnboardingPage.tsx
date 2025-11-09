@@ -45,14 +45,47 @@ export default function OnboardingPage({ onOnboardingComplete }: OnboardingPageP
     };
 
   
-  const handleNext = () => {
-    if (currentStep < steps.length-1) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      navigate("/globe"); 
-      onOnboardingComplete();
-    }
-  };
+    const handleNext = () => {
+      if (currentStep < steps.length - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        // Finish onboarding
+        onOnboardingComplete();
+    
+        // Pass selected data via navigate state
+        navigate("/globe", {
+          state: {
+            hobbies: selectedHobbies,
+            countries: selectedCountries
+          }
+        });
+      }
+    };
+    
+    // const handleNext = async () => {
+    //   if (currentStep < steps.length - 1) {
+    //     setCurrentStep(currentStep + 1);
+    //   } else {
+    //     // Send user info to backend
+    //     await fetch("/api/save_user", {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({
+    //         name: userName,
+    //         email: userEmail,
+    //         gender: selectedGender,
+    //         budget: selectedBudget,
+    //         hobbies: selectedHobbies,
+    //         canDrive,
+    //         dreamCountry: "France", // hardcoded
+    //       }),
+    //     });
+    
+    //     onOnboardingComplete();
+    //     navigate("/globe", { state: { country: "France" } });
+    //   }
+    // };
+    
 
   const handlePrev = () => {
     if (currentStep > 1) {
