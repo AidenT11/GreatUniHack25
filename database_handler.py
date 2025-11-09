@@ -6,8 +6,8 @@ try:
     sqliteConnection = sqlite3.connect('Holiday_Buddies.db')
     cursor = sqliteConnection.cursor()
 
-    username1 = 'noah'
-    username2 = 'kevin'
+    username1 = 'bob'
+    username2 = 'noah'
 
     person1_location = ", ".join(database_query(cursor, "SELECT COUNTRY, CITY FROM user_info WHERE name ='"+username1+"'")[0])
     person2_location = ", ".join(database_query(cursor, "SELECT COUNTRY, CITY FROM user_info WHERE name = '"+username2+"'")[0])
