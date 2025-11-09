@@ -8,9 +8,9 @@ CREATE TABLE user_info (
 
     country TEXT NOT NULL,
     city TEXT NOT NULL,
-    can_drive INTEGER DEFAULT 0,
-    likes_hot INTEGER DEFAULT 0,
-    likes_cold INTEGER DEFAULT 0,
+    likes_hiking INTEGER DEFAULT 0,
+    likes_reading INTEGER DEFAULT 0,
+    likes_cooking INTEGER DEFAULT 0,
     FOREIGN KEY (user_id)
        REFERENCES users (user_id)
 );

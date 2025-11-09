@@ -1,10 +1,8 @@
 import sqlite3
 
-def database_query(cursor, query):
+def database_update(cursor, statement):
     try:
-        cursor.execute(query)
-
-        return cursor.fetchall()
+        cursor.execute(statement)
 
     except sqlite3.Error as error:
         return 'Error occurred - ' + str(error)
