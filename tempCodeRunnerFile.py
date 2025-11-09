@@ -1,0 +1,1 @@
+filtered_df.to_csv("airports.csv", index=False)
