@@ -40,7 +40,7 @@ function AppContent({ authStatus, setAuthStatus }: { authStatus: AuthStatus; set
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         onNavigate={handleNavigate}
-        currentPage={window.location.pathname.replace('/', '') || 'globe'}
+        currentPage={window.location.pathname}
         authStatus={authStatus}
         onLoginSuccess={() => setAuthStatus('loggedIn')}
         onSignUpSuccess={() => setAuthStatus('needsOnboarding')}

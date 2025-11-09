@@ -39,22 +39,37 @@ export default function GlobePage() {
     return () => clearInterval(interval);
   }, [isSpinning]);
 
-  const handleGlobeClick = () => {
+  const handleGlobeClick = async () => {
     setIsSpinning(false);
   
-    // Pick a random country or force France
+    // Pick a random country
     const randomCountry = countries[Math.floor(Math.random() * countries.length)];
-    setSelectedCountry(randomCountry.name); // or randomCountry.name
+    setSelectedCountry('France');
     setShowCountry(true);
-    localStorage.setItem("selectedCountry", randomCountry.name);
+    localStorage.setItem("selectedCountry", 'France');
   
-    // Redirect after short delay
-    setTimeout(() => {
-      navigate('/matchmaking', {
-        state: { country: 'France', emoji: '🇫🇷' }, // pass data to matchmaking page
-      });
-    }, 1000); // 1 second delay for effect
+    try {
+      // Fetch matched user for "current user"
+      // Here we hardcode user_id = 2 for testing, replace with real logged-in user
+      const response = await fetch(`http://localhost:5000/api/match_user/2`);
+      const matchedUser = await response.json();
+  
+      // Navigate to matchmaking page with matched user info
+      setTimeout(() => {
+        navigate("/matchmaking", {
+          state: {
+            matchedUser,
+            country: 'France',
+          },
+        });
+      }, 1000);
+  
+    } catch (error) {
+      console.error("Error fetching match:", error);
+    }
   };
+  
+  
   
 
   return (
