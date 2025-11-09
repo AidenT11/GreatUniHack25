@@ -6,19 +6,12 @@ import { X, ArrowLeft, Mail, Lock, User } from 'lucide-react';
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
-<<<<<<< HEAD
   onNavigate: (page: 'globe' | 'passport' | 'ticket') => void;
   currentPage: 'globe' | 'passport' | 'ticket';
-  isLoggedIn: boolean;
-  onAuthChange: (isLoggedIn: boolean) => void;
-=======
-  onNavigate: (page: 'globe' | 'passport') => void;
-  currentPage: 'globe' | 'passport';
   authStatus: 'loggedOut' | 'needsOnboarding' | 'loggedIn';
   onLoginSuccess: () => void;
   onSignUpSuccess: () => void;
   onLogout: () => void;
->>>>>>> e9a8ee668ef5ece97e4feccb61b474442e62f3e6
 }
 
 type DrawerView = 'menu' | 'login' | 'signup';
@@ -38,15 +31,14 @@ export default function Drawer({
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-<<<<<<< HEAD
+  // NOTE: correct union type used here
   const handleNavigate = (page: 'globe' | 'passport' | 'ticket') => {
-=======
-  const handleNavigate = (page: 'globe' | 'passport') => {
-    if (page === 'passport' && authStatus !== 'loggedIn') {
-      setView('login'); 
+    // require login for restricted pages (passport & ticket)
+    if ((page === 'passport') && authStatus !== 'loggedIn') {
+      setView('login');
       return;
     }
->>>>>>> e9a8ee668ef5ece97e4feccb61b474442e62f3e6
+
     onNavigate(page);
     onClose();
   };
@@ -76,19 +68,19 @@ export default function Drawer({
   };
 
   const handleLogout = () => {
-    onLogout(); 
-    onNavigate('globe'); 
+    onLogout();
+    // safe navigate back to home
+    onNavigate('globe');
     handleClose();
   };
 
   const renderContent = () => {
-    // LOGIN VIEW
     if (view === 'login') {
       return (
         <form onSubmit={handleLogin} className="flex flex-col space-y-4">
           <h3 className="text-2xl font-bold text-gray-900 mb-2">Sign in or create an account</h3>
           <p className="text-gray-600 text-sm mb-4">You can sign in using your HolidayBuddy account to access our services.</p>
-          
+
           <label htmlFor="email-login" className="text-sm font-medium text-gray-700">Email Address</label>
           <input
             id="email-login"
@@ -97,16 +89,14 @@ export default function Drawer({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-base"
-            style={{ fontSize: '16px' }} // Ensures font size is readable on mobile
+            style={{ fontSize: '16px' }}
           />
 
-          {/* This button replaces the 'Continue with email' in the Booking.com example */}
           <button type="submit" className="w-full px-4 py-3 rounded-md bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 transition-colors mt-6"
             style={{ fontSize: '18px', fontWeight: 'bold' }}>
             Continue with email
           </button>
 
-          {/* Option to create account within login view */}
           <div className="text-center mt-6">
             <span className="text-gray-600">Don't have an account? </span>
             <button type="button" onClick={() => setView('signup')} className="text-blue-600 hover:underline font-semibold">
@@ -117,7 +107,6 @@ export default function Drawer({
       );
     }
 
-    // SIGNUP VIEW 
     if (view === 'signup') {
       return (
         <form onSubmit={handleSignUp} className="flex flex-col space-y-4">
@@ -134,7 +123,7 @@ export default function Drawer({
             className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-base"
             style={{ fontSize: '16px' }}
           />
-          
+
           <label htmlFor="email-signup" className="text-sm font-medium text-gray-700">Email Address</label>
           <input
             id="email-signup"
@@ -161,7 +150,7 @@ export default function Drawer({
             style={{ fontSize: '18px', fontWeight: 'bold' }}>
             Create Account
           </button>
-          
+
           <div className="text-center mt-6">
             <span className="text-gray-600">Already have an account? </span>
             <button type="button" onClick={() => setView('login')} className="text-blue-600 hover:underline font-semibold">
@@ -172,7 +161,6 @@ export default function Drawer({
       );
     }
 
-    //  MENU VIEW
     return (
       <nav className="space-y-2">
         <button
@@ -185,6 +173,7 @@ export default function Drawer({
         >
           Explore Globe
         </button>
+
         <button
           onClick={() => handleNavigate('passport')}
           className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
@@ -206,7 +195,7 @@ export default function Drawer({
         >
           My Tickets
         </button>
-        
+
         <div className="pt-2 border-t" />
 
         {authStatus === 'loggedIn' ? (
@@ -221,14 +210,14 @@ export default function Drawer({
             <button
               onClick={() => setView('login')}
               className="w-full px-4 py-3 rounded-md bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 transition-colors"
-              style={{ fontSize: '18px', fontWeight: 'bold' }} 
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
             >
               Log In
             </button>
             <button
               onClick={() => setView('signup')}
               className="w-full px-4 py-3 rounded-md bg-gray-200 text-gray-800 font-bold text-lg hover:bg-gray-300 transition-colors"
-              style={{ fontSize: '18px', fontWeight: 'bold' }} 
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
             >
               Sign Up
             </button>
