@@ -6,10 +6,13 @@ try:
     sqliteConnection = sqlite3.connect('Holiday_Buddies.db')
     cursor = sqliteConnection.cursor()
 
-    area1 = "Germany, Hamburg"
-    area2 = "Austria, Graz"
+    username1 = 'noah'
+    username2 = 'kevin'
 
-    location1, location2 = geocode_coords(area1, area2)
+    person1_location = ", ".join(database_query(cursor, "SELECT COUNTRY, CITY FROM user_info WHERE name ='"+username1+"'")[0])
+    person2_location = ", ".join(database_query(cursor, "SELECT COUNTRY, CITY FROM user_info WHERE name = '"+username2+"'")[0])
+
+    location1, location2 = geocode_coords(person1_location, person2_location)
 
     print(find_airport(location1, location2))
 
