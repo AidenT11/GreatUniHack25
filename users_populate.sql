@@ -1,9 +1,9 @@
-/*INSERT INTO users (username, password)
+INSERT INTO users (username, password)
 VALUES
 ('bobbo123', 'bobiscool'),
 ('kevin123', 'keviniscool'),
 ('noah123', 'noahiscool');
-*/
+
 
 INSERT INTO user_info (user_id, name, age, gender, country, city)
 VALUES
